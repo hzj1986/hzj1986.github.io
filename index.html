@@ -78,6 +78,61 @@
     <div class="container">
         <section id="main">
             <h1>免费白嫖</h1>
+            <p><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>M3U8 Player</title>
+    <!-- Include hls.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <video id="video" controls></video>
+
+    <script>
+        // Create an Hls instance
+        var hls = new Hls();
+
+        // Load the M3U8 URL
+        hls.loadSource('https://v.cdnlz12.com/20240131/11213_0006f281/index.m3u8');
+
+        // Attach the Hls instance to the video element
+        hls.attachMedia(document.getElementById('video'));
+
+        // Listen for the Hls "media_attached" event to know when the video is ready to play
+        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+            console.log('video and hls.js are now bound together !');
+        });
+
+        // Listen for the Hls "levels_loaded" event to know when the video has levels loaded
+        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+            console.log('manifest loaded, found', data.levels.length, 'quality level');
+        });
+
+        // Listen for the Hls "error" event to handle any errors
+        hls.on(Hls.Events.ERROR, function (event, data) {
+            if (data.fatal) {
+                switch (data.type) {
+                    case Hls.ErrorTypes.NETWORK_ERROR:
+                        console.error('fatal network error encountered, try to recover:', data);
+                        hls.startLoad();
+                        break;
+                    case Hls.ErrorTypes.MEDIA_ERROR:
+                        console.error('fatal media error encountered, no reason to recover:', data);
+                        hls.destroy();
+                        break;
+                    default:
+                        // try to recover anyway
+                        hls.recoverMediaError(event, data);
+                        break;
+                }
+            } else {
+                console.error('non-fatal error:', data);
+            }
+        });
+    </script>
+</body>
+</html></p>
             <p><a href="https://www.icesun.cn/tools/player-m3u8.php?url=https%3A%2F%2Fvip.yzzy23-play.com%2F20240607%2F14130_efbd83e5%2F2000k%2Fhls%2Fmixed.m3u8" target="_blank">点击试看1</a>
 <a href="http://s.mrw.so/9wRoP?hzj=" target="_blank">点击试看2密码198609</a></p>
         </section>
