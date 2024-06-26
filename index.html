@@ -78,58 +78,103 @@
     <div class="container">
         <section id="main">
             <h1>免费白嫖</h1>
-            <p><!DOCTYPE html>
+            <p><!DOCTYPE html> 
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>M3U8 Player</title>
-    <!-- Include hls.js library -->
+<head> 
+    <meta charset="UTF-8"> 
+    <title>Single Video Player on Click</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        .video-row {
+            display: flex; 
+            flex-wrap: wrap;
+            justify-content: space-around;
+            padding: 10px;
+        }
+ 
+        .video-container { 
+            flex: 1 1 200px; /* 设置最小宽度，并允许增长XX，自动分配剩余空间 */
+            max-width: 45%; /* 限制最大宽度，以防止单个视频占用过多空间 */
+            margin: 10px;
+            position: relative;
+        }
+ 
+        .video-player { 
+            width: 100%;
+            height: auto;
+        }
+    </style>
+</head> 
+<body> 
+    <!-- 移除标题 -->
+    <div class="video-row">
+        <div class="video-container" id="container1">
+            <video class="video-player" id="video1" controls></video>《末路狂花钱》
+        </div>
+        <div class="video-container" id="container2">
+            <video class="video-player" id="video2" controls></video>《孤注一掷》
+        </div>
+        <div class="video-container" id="container3">
+            <video class="video-player" id="video3" controls></video>🔞【高清无码】商谈不成立の责任で、知らぬ男に抱かれる大手不动产営业のキャリアウーマンに中出し制裁してあげた #3
+        </div>
+        <div class="video-container" id="container4">
+            <video class="video-player" id="video4" controls></video>🔞【AI明星淫梦】刘亦菲大战黑金刚
+        </div>
+        <!-- 更多视频播放器... --> 
+    </div>
+ 
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-</head>
-<body>
-    <video id="video" controls></video>
-
     <script>
-        // Create an Hls instance
-        var hls = new Hls();
-
-        // Load the M3U8 URL
-        hls.loadSource('https://vip.yzzy23-play.com/20240607/14130_efbd83e5/2000k/hls/mixed.m3u8');
-
-        // Attach the Hls instance to the video element
-        hls.attachMedia(document.getElementById('video'));
-
-        // Listen for the Hls "media_attached" event to know when the video is ready to play
-        hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-            console.log('video and hls.js are now bound together !');
-        });
-
-        // Listen for the Hls "levels_loaded" event to know when the video has levels loaded
-        hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-            console.log('manifest loaded, found', data.levels.length, 'quality level');
-        });
-
-        // Listen for the Hls "error" event to handle any errors
-        hls.on(Hls.Events.ERROR, function (event, data) {
-            if (data.fatal) {
-                switch (data.type) {
-                    case Hls.ErrorTypes.NETWORK_ERROR:
-                        console.error('fatal network error encountered, try to recover:', data);
-                        hls.startLoad();
-                        break;
-                    case Hls.ErrorTypes.MEDIA_ERROR:
-                        console.error('fatal media error encountered, no reason to recover:', data);
-                        hls.destroy();
-                        break;
-                    default:
-                        // try to recover anyway
-                        hls.recoverMediaError(event, data);
-                        break;
+        // 初始化视频播放器的函数
+        function initPlayer(videoId, sourceUrl) {
+            var video = document.getElementById(videoId);
+            var hls = new Hls();
+            hls.loadSource(sourceUrl);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                // 不设置默认静音 
+            });
+ 
+            // 添加点击事件监听器 
+            video.addEventListener('click', function() {
+                if (!video.paused) {
+                    video.pause();
+                    currentPlaying = null; 
+                } else {
+                    stopOtherVideos(videoId);
+                    video.play();
+                    currentPlaying = videoId; 
                 }
-            } else {
-                console.error('non-fatal error:', data);
-            }
-        });
+            });
+        }
+ 
+        // 停止所有其他视频播放的辅助函数
+        function stopOtherVideos(currentVideoId) {
+            var allVideos = ['video1', 'video2']; // 根据实际情况调整视频ID列表
+            allVideos.forEach(function(videoId) {
+                if (videoId !== currentVideoId) {
+                    var otherVideo = document.getElementById(videoId);
+                    if (!otherVideo.paused) {
+                        otherVideo.pause();
+                    } 
+                }
+            });
+        }
+ 
+        // 当前正在播放的视频ID
+        var currentPlaying = null; 
+ 
+        // 初始化视频播放器
+        initPlayer('video1', 'https://vip.yzzy23-play.com/20240607/14130_efbd83e5/2000k/hls/mixed.m3u8');
+        initPlayer('video2', 'https://v.cdnlz12.com/20240131/11213_0006f281/index.m3u8');
+        initPlayer('video3', 'https://cdn3.91aiai-videos2.com/202306/t6130/m3u8/index.m3u8'); 
+        initPlayer('video4', 'https://cdn3.91aiai-videos2.com/202308/t6910/m3u8/index.m3u8');  
+        // 更多视频播放器...
     </script>
 </body>
 </html></p>
