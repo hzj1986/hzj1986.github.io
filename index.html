@@ -78,40 +78,40 @@
     <div class="container">
         <section id="main">
             <h1>免费白嫖</h1>
-            <p><!DOCTYPE html>
+            <p><!DOCTYPE html> 
 <html lang="en">
-<head>
+<head> 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     <title>Single Video Player on Click</title>
     <style>
         body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            box-sizing: border-box; 
             font-size: 16px; /* 增加默认字体大小 */
         }
-
+ 
         .video-row {
-            display: flex;
+            display: flex; 
             flex-wrap: wrap;
             justify-content: space-around;
             padding: 10px;
         }
-
-        .video-container {
+ 
+        .video-container { 
             flex: 1 1 200px;
             max-width: 45%;
             margin: 10px;
             position: relative;
         }
-
-        .video-player {
+ 
+        .video-player { 
             width: 100%;
             height: auto;
         }
-
-        @media screen and (max-width: 768px) {
+ 
+        @media screen and (max-width: 768px) { 
             /* 在小屏幕上，让视频容器占据全行 */
             .video-container {
                 max-width: 100%;
@@ -122,46 +122,36 @@
 <body>
     <div class="video-row">
         <div class="video-container" id="container1">
-            <video class="video-player" id="video1" controls></video>《孤注一掷》
+            <video class="video-player" id="video1" controls></video>《末路狂花钱》
         </div>
         <div class="video-container" id="container2">
-            <video class="video-player" id="video2" controls></video>《末路狂花钱》
-        </div>
-        <div class="video-container" id="container3">
-            <video class="video-player" id="video3" controls></video>🔞【AI明星淫梦】刘亦菲大战黑金刚
-        </div>
-        <div class="video-container" id="container4">
-            <video class="video-player" id="video4" controls></video>🔞【高清无码】商谈不成立の责任で、知らぬ男に抱かれる大手不动产営业のキャリアウーマンに中出し制裁してあげた #3
-        </div>
-        
-        <!-- 更多视频播放器... -->
+            <video class="video-player" id="video2" controls></video>🔞【AI明星淫梦】刘亦菲大战黑金刚
+        </div> 
+        <!-- 更多视频播放器... --> 
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+ 
     <script>
         function initPlayer(videoId, sourceUrl) {
-            var video = document.getElementById(videoId);
-            var hls = new Hls();
-            hls.loadSource(sourceUrl);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                // 不设置默认静音
+            var video = document.getElementById(videoId); 
+            video.src = sourceUrl; 
+            video.addEventListener('loadedmetadata', function() {
+                video.play(); 
             });
-
-            // 添加点击事件监听器（也适用于触摸事件）
-            video.addEventListener('click touchstart', function(e) {
+ 
+            // 添加点击事件监听器（也适用于触摸事件） 
+            video.addEventListener('click touchstart', function(e) { 
                 e.preventDefault(); // 阻止默认行为，以防触摸事件触发滚动
                 if (!video.paused) {
                     video.pause();
-                    currentPlaying = null;
+                    currentPlaying = null; 
                 } else {
                     stopOtherVideos(videoId);
                     video.play();
-                    currentPlaying = videoId;
+                    currentPlaying = videoId; 
                 }
             });
-        }
-
+        } 
+ 
         function stopOtherVideos(currentVideoId) {
             var allVideos = ['video1', 'video2'];
             allVideos.forEach(function(videoId) {
@@ -169,17 +159,15 @@
                     var otherVideo = document.getElementById(videoId);
                     if (!otherVideo.paused) {
                         otherVideo.pause();
-                    }
+                    } 
                 }
             });
         }
-
+ 
         var currentPlaying = null;
-
-        initPlayer('video1', 'https://v.cdnlz12.com/20240131/11213_0006f281/index.m3u8');
-        initPlayer('video2', 'https://vip.yzzy23-play.com/20240607/14130_efbd83e5/2000k/hls/mixed.m3u8');
-        initPlayer('video3', 'hhttps://cdn3.91aiai-videos2.com/202308/t6910/m3u8/index.m3u8');
-        initPlayer('video4', 'https://cdn3.91aiai-videos2.com/202306/t6130/m3u8/index.m3u8');
+ 
+        initPlayer('video1', 'https://vip.yzzy23-play.com/20240607/14130_efbd83e5/2000k/hls/mixed.m3u8');
+        initPlayer('video2', 'https://cdn3.91aiai-videos2.com/202308/t6910/m3u8/index.m3u8'); 
         // 更多视频播放器...
     </script>
 </body>
