@@ -110,7 +110,56 @@
     <div class="container">
         <section id="main">
             <h1>会员&专区</h1>
-            <p>这里输入您需要展示给客户的内容图片，视频，文档等。</p>
+            <p><!DOCTYPE html> 
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <title>Live TV Streaming</title>
+    <style>
+        video { 
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            display: block; 
+        } 
+        select {
+            display: block;
+            margin: 10px auto; 
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <select id="streamSelect"> 
+        <!-- 直播源将在这里动态填充 --> 
+    </select>
+    <video id="player" controls autoplay style="display:block; margin: 0 auto;"></video>
+    <script>
+        // 获取直播源列表
+        fetch('https://codeberg.org/hzj1986/huangzaijiang198609/raw/branch/main/%E7%8C%AB%E6%8A%93%E6%BA%90.txt') 
+            .then(response => response.text()) 
+            .then(data => {
+                const streams = data.split('\n').filter(Boolean); // 分割并过滤空行
+                const selectElement = document.getElementById('streamSelect');
+                streams.forEach(stream => {
+                    const option = document.createElement('option');
+                    option.value = stream;
+                    option.text = stream;
+                    selectElement.appendChild(option);
+                });
+                selectElement.addEventListener('change', function() {
+                    document.getElementById('player').src = this.value;
+                });
+                // 默认选择第一个直播源
+                if (streams.length > 0) {
+                    selectElement.selectedIndex = 0;
+                    document.getElementById('player').src = streams[0]; 
+                }
+            })
+            .catch(error => console.error('Error fetching stream list:', error));
+    </script>
+</body> 
+</html></p>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">   
             <p><a href="https://www.icesun.cn/tools/player-m3u8.php?url=https%3A%2F%2Fvip.yzzy23-play.com%2F20240607%2F14130_efbd83e5%2F2000k%2Fhls%2Fmixed.m3u8" target="_blank">点击试看1</a>
 <a href="http://s.mrw.so/9wRoP?hzj=" target="_blank">点击试看2密码198609</a></p>
