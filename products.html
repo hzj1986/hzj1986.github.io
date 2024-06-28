@@ -136,7 +136,7 @@
     <video id="player" controls autoplay style="display:block; margin: 0 auto;"></video>
     <script>
         // 获取直播源列表
-        fetch('https://codeberg.org/hzj1986/huangzaijiang198609/raw/branch/main/%E7%8C%AB%E6%8A%93%E7%94%B5%E5%BD%B1.txt') 
+        fetch('https://codeberg.org/hzj1986/huangzaijiang198609/raw/branch/main/%E7%8C%AB%E6%8A%93%E7%94%B5%E5%BD%B1.txt')
             .then(response => response.text()) 
             .then(data => {
                 const streams = data.split('\n').filter(Boolean); // 分割并过滤空行
