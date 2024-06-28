@@ -111,49 +111,85 @@
         <section id="main">
             <h1>会员&专区</h1>
             <p><!DOCTYPE html> 
-<html lang="en">
-<head> 
-    <meta charset="UTF-8">
-    <title>Dynamic Video Player</title>
-    <style>
-        /* 为输入框和播放器添加一些基本样式 */ 
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8"> 
+    <title>Subscription Video Player</title> 
+    <style> 
+        /* 添加一些基本样式 */
         #urlInput {
             margin-bottom: 10px; 
         }
-        #myVideo { 
+        #player {
             width: 320px;
-            height: 240px;
+            height: 240px; 
         }
-    </style> 
+    </style>
 </head>
 <body>
  
-<input type="text" id="urlInput" placeholder="Enter video URL..."> 
-<button onclick="loadVideo()">Load Video</button>
+<input type="text" id="urlInput" placeholder="Enter subscription URL..."> 
+<button id="subscribeButton">Subscribe</button> 
  
-<video id="myVideo" controls></video>
+<div id="player"></div> 
  
-<script>
-// JavaScript代码来处理视频加载
-function loadVideo() {
-    var url = document.getElementById('urlInput').value;
-    var videoElement = document.getElementById('myVideo'); 
-    
-    // 清空现有的视频源 
-    videoElement.innerHTML = '';
-     
+<script> 
+// 假设这是你的后端API URL，用于获取视频播放地址
+const API_URL = 'https://api.example.com/video-url';
+ 
+// 获取DOM元素
+const urlInput = document.getElementById('urlInput');
+const subscribeButton = document.getElementById('subscribeButton');
+const player = document.getElementById('player');
+ 
+// 初始化视频播放器状态
+let videoUrl = ''; 
+ 
+// 处理订阅按钮点击事件
+subscribeButton.addEventListener('click', function() {
+    // 获取用户输入的URL
+    const subscriptionUrl = urlInput.value; 
+ 
+    // 发送请求到后端API，订阅更新
+    fetch(subscriptionUrl)
+        .then(response => response.json())
+        .then(data => {
+            // 更新视频播放地址
+            videoUrl = data.videoUrl;
+            updatePlayer();
+        })
+        .catch(error => {
+            console.error('Error subscribing to updates:', error);
+        }); 
+});
+ 
+// 更新播放器函数
+function updatePlayer() {
+    // 清除现有播放器内容 
+    player.innerHTML = ''; 
+ 
+    // 创建新的video元素
+    const videoElement = document.createElement('video');
+    videoElement.setAttribute('controls', ''); 
+ 
     // 创建新的source元素并设置其src属性
-    var sourceElement = document.createElement('source'); 
-    sourceElement.src = url; 
+    const sourceElement = document.createElement('source'); 
+    sourceElement.src = videoUrl; 
     sourceElement.type = 'video/mp4'; // 根据实际情况修改MIME类型
-    
-    // 将新的source元素添加到video标签中 
-    videoElement.appendChild(sourceElement);
-} 
-</script> 
  
-</body>
-</html> </p>
+    // 将新的source元素添加到video标签中
+    videoElement.appendChild(sourceElement);
+ 
+    // 将新的video元素添加到页面中 
+    player.appendChild(videoElement);
+} 
+ 
+// 初始化播放器
+updatePlayer();
+</script>
+ 
+</body> 
+</html></p>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">   
             <p><a href="https://www.icesun.cn/tools/player-m3u8.php?url=https%3A%2F%2Fvip.yzzy23-play.com%2F20240607%2F14130_efbd83e5%2F2000k%2Fhls%2Fmixed.m3u8" target="_blank">点击试看1</a>
 <a href="http://s.mrw.so/9wRoP?hzj=" target="_blank">点击试看2密码198609</a></p>
